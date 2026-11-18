@@ -1,0 +1,27 @@
+[data-install][hidden], [data-fullscreen][hidden] { display: none !important; }
+
+.pwa-dialog {
+  box-sizing: border-box;
+  width: min(24rem, calc(100vw - 2rem));
+  padding: 1.6rem;
+  color: #fff2c2;
+  background: #191a31;
+  border: 1px solid #7873a0;
+  border-radius: 12px;
+  font-family: inherit;
+  box-shadow: 0 1rem 4rem #06061480;
+}
+.pwa-dialog::backdrop { background: #090919bc; }
+.pwa-dialog h2 { color: inherit; font-size: 1.4rem; line-height: 1.2; margin: 0; }
+.pwa-dialog p { color: #e1deed; line-height: 1.5; margin: .8rem 0 1.4rem; }
+.pwa-dialog button {
+  min-height: 44px;
+  padding: .55rem 1rem;
+  color: #171420;
+  background: #ff946a;
+  border: 0;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}

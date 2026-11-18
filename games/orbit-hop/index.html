@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Time your launch from one tiny planet to the next in Orbit Hop, a one-button arcade game.">
+  <title>Orbit Hop · Pocket Cabinet</title>
+  <!-- arcade:head -->
+  <link rel="stylesheet" href="./game.css">
+  <script type="module" src="./game.js"></script>
+</head>
+<body>
+  <div class="game-page">
+    <nav aria-label="Game navigation">
+      <a class="back" href="../../"><span aria-hidden="true">←</span> Pocket Cabinet</a>
+      <div class="tools">
+        <button type="button" data-install hidden>Install game</button>
+        <button type="button" data-fullscreen><span class="expand-icon" aria-hidden="true"></span><span data-fullscreen-label>Fullscreen</span></button>
+      </div>
+    </nav>
+    <main>
+      <header class="game-heading">
+        <h1>Orbit Hop</h1>
+        <p>Time your launch from one planet to the next.</p>
+      </header>
+      <section class="cabinet" aria-label="Orbit Hop playfield">
+        <div class="hud">
+          <div class="stats">
+            <div class="stat"><span>Hops</span><strong id="score">00</strong></div>
+            <div class="stat"><span>Best</span><strong id="best">00</strong></div>
+          </div>
+          <div class="play-tools">
+            <button id="sound" type="button" aria-pressed="false" title="Turn sound on">Sound off</button>
+            <button id="pause" type="button" disabled title="Pause (P)">Pause</button>
+          </div>
+        </div>
+        <div class="field">
+          <canvas aria-label="A rocket orbiting a planet, with the next planet marked ahead. Use the action button below to play."></canvas>
+          <div id="overlay" hidden><span id="overlay-title"></span><small id="overlay-detail"></small></div>
+        </div>
+        <div class="controls">
+          <div class="guidance">
+            <span id="signal" class="signal">Ready</span>
+            <p id="hint">Launch when the dotted line points at the next planet.</p>
+          </div>
+          <button class="action" id="action" type="button">Start game <span aria-hidden="true">→</span></button>
+        </div>
+      </section>
+      <p class="input-note"><span class="touch-hint">Tap the playfield to launch.</span><span class="key-hint"><kbd>Space</kbd> to launch <i>·</i> <kbd>P</kbd> to pause</span></p>
+      <p id="announce" class="visually-hidden" role="status"></p>
+      <noscript>Enable JavaScript to play Orbit Hop.</noscript>
+    </main>
+  </div>
+</body>
+</html>

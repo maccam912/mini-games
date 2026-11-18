@@ -1,0 +1,13 @@
+{
+  "title": "Orbit Hop",
+  "description": "Time your launch and hop from planet to planet. How far can you make it into deep space?",
+  "genre": "Arcade",
+  "controls": "One button",
+  "cover": "cover.png",
+  "wordmark": "wordmark.svg",
+  "featured": true,
+  "icon192": "icon-192.png",
+  "icon512": "icon-512.png",
+  "maskableIcon": "icon-512.png",
+  "themeColor": "#151427"
+}
