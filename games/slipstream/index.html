@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="description"
+      content="Race the Salt Cup. Read the wind, ride a rival’s wake, and boost past the pack."
+    />
+    <title>Slipstream · Pocket Cabinet</title>
+    <!-- arcade:head -->
+    <link rel="icon" href="./icon-192.png" />
+    <link rel="preload" href="./barlow-condensed.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./salt-flats.webp" as="image" />
+    <link rel="stylesheet" href="./game.css" />
+    <script type="module" src="./game.js"></script>
+  </head>
+  <body>
+    <svg class="symbols" aria-hidden="true">
+      <defs>
+        <symbol id="icon-back" viewBox="0 0 24 24"><path d="M20 12H4m7-7-7 7 7 7" /></symbol>
+        <symbol id="icon-forward" viewBox="0 0 24 24"><path d="M4 12h16m-7-7 7 7-7 7" /></symbol>
+        <symbol id="icon-left" viewBox="0 0 24 24"><path d="m15 4-8 8 8 8" /></symbol>
+        <symbol id="icon-right" viewBox="0 0 24 24"><path d="m9 4 8 8-8 8" /></symbol>
+        <symbol id="icon-expand" viewBox="0 0 24 24">
+          <path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5" />
+        </symbol>
+        <symbol id="icon-help" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M9 9a3 3 0 1 1 5 2.3c-1.5 1-2 1.6-2 2.7m0 3h.01" />
+        </symbol>
+        <symbol id="icon-pause" viewBox="0 0 24 24"><path d="M8 5v14m8-14v14" stroke-width="4" /></symbol>
+        <symbol id="icon-boost" viewBox="0 0 24 24"><path d="m14 2-9 12h6l-1 8 9-13h-6l1-7Z" /></symbol>
+        <symbol id="icon-wind" viewBox="0 0 24 24">
+          <path d="M2 8h12a3 3 0 1 0-3-3M5 12h14a3 3 0 1 0-2.7-4.3M2 16h11a3 3 0 1 1-3 3" />
+        </symbol>
+      </defs>
+    </svg>
+    <main id="game" data-mode="menu" aria-label="Slipstream racing game">
+      <canvas
+        id="world"
+        aria-label="The salt flats race course. Blue ribbons behind other cars show their slipstreams."
+      ></canvas>
+      <nav class="topbar" aria-label="Game menu">
+        <a class="tool cabinet" href="../../"
+          ><svg><use href="#icon-back" /></svg><span>Pocket Cabinet</span></a
+        >
+        <div>
+          <button class="tool" data-install hidden>Install game</button>
+          <button class="tool" id="help" aria-label="How to race" title="How to race">
+            <svg><use href="#icon-help" /></svg>
+          </button>
+          <button class="tool fullscreen" data-fullscreen hidden aria-label="Fullscreen">
+            <svg><use href="#icon-expand" /></svg>
+          </button>
+          <button class="tool" id="pause" hidden aria-label="Pause race" title="Pause (P)">
+            <svg><use href="#icon-pause" /></svg>
+          </button>
+        </div>
+      </nav>
+      <section id="menu" aria-labelledby="title">
+        <div class="marque">
+          <p class="eyebrow"><i></i> Bonneville Salt Flats</p>
+          <h1 id="title">
+            Slipstream<span class="stripes" aria-hidden="true"><i></i><i></i><i></i></span>
+          </h1>
+          <p class="pitch">Catch a rival’s slipstream to build speed for the pass.</p>
+        </div>
+        <div class="grid-card">
+          <div class="grid-copy">
+            <span class="flag" aria-hidden="true"></span>
+            <div>
+              <strong>The Salt Cup</strong>
+              <p>Three heats. Four racers. Most points wins.</p>
+            </div>
+          </div>
+          <button class="primary" id="start">
+            Race the cup <svg><use href="#icon-forward" /></svg>
+          </button>
+        </div>
+      </section>
+
+      <section id="instruments" hidden aria-label="Race instruments">
+        <div class="race-top">
+          <div class="race-identity">
+            <span class="flag" aria-hidden="true"></span>
+            <div><small id="heat-label"></small><strong id="heat-name"></strong></div>
+          </div>
+          <div class="progress">
+            <div class="progress-label"><span>Finish</span><b id="remaining"></b></div>
+            <div class="progress-rail"><i id="progress"></i></div>
+          </div>
+        </div>
+        <div class="position"><small>Position</small><b id="place"></b><span> / 4</span></div>
+        <div class="wind">
+          <svg><use href="#icon-wind" /></svg><span id="wind"></span>
+        </div>
+        <div class="dash">
+          <div class="speed">
+            <small>Speed</small>
+            <div><b id="speed"></b><span> km/h</span></div>
+          </div>
+          <div class="aero">
+            <small>Air drag</small><strong id="force"></strong><span id="shelter"></span>
+          </div>
+          <div class="battery">
+            <small>Boost <span id="energy"></span></small>
+            <div><i id="charge"></i></div>
+          </div>
+        </div>
+      </section>
+      <div id="countdown" hidden aria-live="polite"></div>
+      <div id="radio" class="radio" hidden role="status"></div>
+      <div id="driving" class="driving" hidden aria-label="Driving controls">
+        <button class="steer" id="steer-left" aria-label="Steer left" title="Steer left (A or left arrow)">
+          <svg><use href="#icon-left" /></svg>
+        </button>
+        <button class="boost" id="boost" aria-pressed="false" title="Hold to boost (Space)">
+          <svg><use href="#icon-boost" /></svg><span>Boost</span>
+        </button>
+        <button
+          class="steer"
+          id="steer-right"
+          aria-label="Steer right"
+          title="Steer right (D or right arrow)"
+        >
+          <svg><use href="#icon-right" /></svg>
+        </button>
+      </div>
+      <section id="panel" class="panel" hidden aria-labelledby="panel-title">
+        <p class="eyebrow"><span class="flag" aria-hidden="true"></span><span id="panel-kicker"></span></p>
+        <h2 id="panel-title"></h2>
+        <p id="panel-detail"></p>
+        <ol id="leaderboard" hidden aria-label="Cup standings"></ol>
+        <button class="primary" id="continue"></button>
+        <button class="secondary" id="restart" hidden>Restart heat</button>
+        <button class="secondary" data-sound>Sound on</button
+        ><a class="secondary" href="../../">Back to arcade</a>
+      </section>
+      <dialog id="briefing" aria-labelledby="briefing-title">
+        <p class="eyebrow"><i></i> Driver’s briefing</p>
+        <h2 id="briefing-title">How to race</h2>
+        <p>
+          Drag across the track to choose a line between lanes. Tap the arrows or use <kbd>A</kbd> and
+          <kbd>D</kbd> to change lanes. Hold <b>Boost</b> or <kbd>Space</kbd> for extra power. Each heat gives
+          you five seconds of boost.
+        </p>
+        <h3>Catch a tow</h3>
+        <p>
+          The car ahead carries air forward. In its blue wake, the air hits you more slowly and your engine
+          can build speed. Move out before you reach its bumper. Avoid the cones.
+        </p>
+        <h3>Read the wind</h3>
+        <p>
+          Crosswinds push the wake sideways and expose the flank of your car. Headwinds increase airspeed. At
+          the same angle, doubling airspeed makes four times the drag.
+        </p>
+        <p>
+          Finish each heat for <b>5, 3, 2 or 1 point</b>. Most points after three heats wins. The final heat
+          breaks ties.
+        </p>
+        <button class="secondary" data-sound>Sound on</button>
+        <form method="dialog"><button class="primary">Got it</button></form>
+      </dialog>
+      <p class="sr" id="announce" role="status"></p>
+      <noscript>Enable JavaScript to race Slipstream.</noscript>
+    </main>
+  </body>
+</html>

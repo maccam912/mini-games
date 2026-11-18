@@ -1,0 +1,10 @@
+{
+  "title": "Slipstream",
+  "description": "Race the Salt Cup. Read shifting crosswinds, ride a rival’s wake and spend your boost on the pass.",
+  "genre": "Racing",
+  "controls": "Steer and boost",
+  "cover": "cover.webp",
+  "icon192": "icon-192.png",
+  "icon512": "icon-512.png",
+  "themeColor": "#172d32"
+}
