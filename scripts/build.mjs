@@ -94,6 +94,7 @@ function manifest(game) {
     start_url: './',
     scope: './',
     display: 'standalone',
+    ...(game.orientation === 'portrait' ? { orientation: 'portrait' } : {}),
     background_color: game.themeColor,
     theme_color: game.themeColor,
     categories: ['games'],

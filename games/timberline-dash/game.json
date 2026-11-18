@@ -1,0 +1,11 @@
+{
+  "title": "Timberline Dash",
+  "description": "Guide a fox courier over mountain trestles. Jump fallen timber, duck the gates, and catch each switchback.",
+  "genre": "Runner",
+  "controls": "One button",
+  "cover": "cover.webp",
+  "icon192": "icon-192.png",
+  "icon512": "icon-512.png",
+  "themeColor": "#162d2b",
+  "orientation": "portrait"
+}

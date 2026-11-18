@@ -1,6 +1,6 @@
 # Pocket Cabinet
 
-A static arcade for small single-player games. [Open the arcade](https://maccam912.github.io/mini-games/) or [play Orbit Hop](https://maccam912.github.io/mini-games/games/orbit-hop/).
+A static arcade for small single-player games. [Open the arcade](https://maccam912.github.io/mini-games/) to play [Orbit Hop](https://maccam912.github.io/mini-games/games/orbit-hop/) or [Timberline Dash](https://maccam912.github.io/mini-games/games/timberline-dash/).
 
 ## Run locally
 
@@ -47,6 +47,21 @@ Open [localhost:4173](http://localhost:4173). The build has no package dependenc
 5. Run the tests and build. The directory automatically lists every game by title and links to its own page. To change the homepage feature, move `"featured": true` to the new game. The first game alphabetically is the fallback. Optional `wordmark` artwork replaces the featured title lettering. An optional `maskableIcon` points to a 512×512 PNG designed for launcher cropping.
 
 The build copies the contents of each published game folder and `shared/` to the site. Keep development-only source art outside those folders. Each game’s service worker caches its game and shared files on the first online visit, so keep those assets small and local. Each game has its own offline cache and home-screen launch URL. Test installation over HTTPS or localhost. On iPhone or iPad, use **Share → Add to Home Screen**.
+
+## Timberline Dash
+
+Tap anywhere on the trail or press Space to jump a log. Hold the same control to slide beneath a gate. At a switchback, tap when the turn prompt lights up. The fox takes the bend at the arrow. Press P or use the pause button to pause.
+
+Babylon.js renders the fox and trail meshes. Cannon runs the rigid-body simulation at 60 Hz. Both engines are bundled locally for offline play. To regenerate the pinned bundles and notices, run `node scripts/refresh-timberline-vendor.mjs`.
+
+<details>
+<summary>Cover and launcher artwork</summary>
+
+The built-in image generator produced [the cover](games/timberline-dash/cover.webp). The [192px](games/timberline-dash/icon-192.png) and [512px](games/timberline-dash/icon-512.png) launcher icons crop the same illustration.
+
+> Landscape 3:2 full-bleed vintage alpine national park adventure game key art, exquisite colorful screenprinted travel-poster illustration in large confident shaped layers and fine tactile halftone paper grain. No lettering or typography anywhere. Dynamic orange red fox courier with cream cheeks and tail tip, dark socks, little teal canvas satchel, running on all fours in mid leap on a sunlit golden wooden railway trestle in the high mountains. Make the fox clearly recognizable in silhouette with angular face, ears, lively determined gaze. Fox centered at x=68%,y=53%, large enough for a good thumbnail. Strong diagonals of trestle sweep from bottom right toward middle left, distant switchbacks span a deep conifer gorge. Jagged snow capped blue and mauve ridges, coral sun and pale apricot sky, dusty teal layers of spruce silhouettes and deep evergreen ink shadows in foreground. Leave left third naturally quiet and dark evergreen for game title overlay, subject right of center as noted. Crisp hand-cut silhouettes, striking light, premium illustrated indie game box art. No text, no letters, no UI, no border.
+
+</details>
 
 ## Assets and deployment
 

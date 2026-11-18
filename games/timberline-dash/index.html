@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Run the mountain trestles as a fox courier. A one-button 3D runner.">
+  <title>Timberline Dash · Pocket Cabinet</title>
+  <!-- arcade:head -->
+  <link rel="icon" href="./icon-192.png">
+  <link rel="stylesheet" href="./game.css">
+  <link rel="preload" as="image" href="./cover.webp">
+  <script type="module" src="./game.js"></script>
+</head>
+<body data-mode="ready">
+  <svg hidden aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+    <symbol id="back" viewBox="0 0 24 24"><path d="m11 5-7 7 7 7M5 12h16"/></symbol>
+    <symbol id="expand" viewBox="0 0 24 24"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></symbol>
+    <symbol id="audio" viewBox="0 0 24 24"><path d="M3 9h4l5-4v14l-5-4H3z"/><path class="wave" d="M16 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path class="muted" d="m16 9 5 6m0-6-5 6"/></symbol>
+    <symbol id="peak" viewBox="0 0 32 24"><path d="m2 20 9-14 6 9 4-7 9 12zM8 11l3 2 3-2"/></symbol>
+    <symbol id="flag" viewBox="0 0 24 24"><path d="M5 21V4m0 0c5-5 9 5 15 0l-2 8c-5 4-8-4-13 0"/></symbol>
+    <symbol id="forward" viewBox="0 0 24 24"><path d="M3 12h16m-7-7 7 7-7 7"/></symbol>
+    <symbol id="jump" viewBox="0 0 32 32"><path d="M3 25c3-2 4-17 15-17h8m-5-5 5 5-5 5M17 25h12"/></symbol>
+    <symbol id="slide" viewBox="0 0 32 32"><path d="m3 10 9 12h16m-5-5 5 5-5 5M16 6h12"/></symbol>
+    <symbol id="turn" viewBox="0 0 32 32"><path d="M6 26v-9a7 7 0 0 1 7-7h13m-6-6 6 6-6 6"/></symbol>
+    <symbol id="pause-icon" viewBox="0 0 24 24"><path stroke-width="4" d="M8 5v14m8-14v14"/></symbol>
+  </defs></svg>
+  <main>
+    <nav aria-label="Game navigation">
+      <a class="back" href="../../"><svg><use href="#back"/></svg>Pocket Cabinet</a>
+      <div class="tools">
+        <button data-install hidden>Install game</button>
+        <button id="sound" aria-label="Turn sound on" aria-pressed="false" title="Turn sound on"><svg><use href="#audio"/></svg></button>
+        <button data-fullscreen hidden title="Fullscreen"><svg><use href="#expand"/></svg></button>
+      </div>
+    </nav>
+    <section class="cabinet" aria-label="Timberline Dash">
+      <div class="field">
+        <canvas id="trail" aria-label="Mountain trestle. Tap to jump or turn, hold to slide."></canvas>
+        <div id="poster"></div>
+        <div class="top-stats">
+          <div id="distance-panel" hidden><small>Distance</small><strong><span id="distance">0</span> <em>m</em></strong></div>
+          <div class="best"><svg><use href="#flag"/></svg><span><small>Best run</small><strong><span id="best">0</span> <em>m</em></strong></span></div>
+          <button id="pause" hidden title="Pause run (P)" aria-label="Pause run"><svg><use href="#pause-icon"/></svg></button>
+        </div>
+        <div class="intro" id="intro">
+          <div class="genre"><svg><use href="#peak"/></svg> One-button runner</div>
+          <h1>Timberline<span>Dash</span></h1>
+          <button class="primary" id="start">Start run <svg><use href="#forward"/></svg></button>
+        </div>
+        <div id="message" hidden>
+          <div class="result">
+            <svg class="result-icon"><use href="#peak"/></svg>
+            <h2 id="message-title"></h2>
+            <p id="message-detail"></p>
+            <button class="primary" id="again">Run again <svg><use href="#forward"/></svg></button>
+          </div>
+        </div>
+        <button id="action" class="action" hidden><svg><use id="action-icon" href="#jump"/></svg><span id="action-label">Tap to jump</span></button>
+      </div>
+      <div class="guide" aria-label="Trail controls">
+        <div><svg><use href="#jump"/></svg><span><b>Jump</b><small>Tap at a log</small></span></div>
+        <div><svg><use href="#slide"/></svg><span><b>Slide</b><small>Hold under a gate</small></span></div>
+        <div><svg><use href="#turn"/></svg><span><b>Turn</b><small>Tap at a bend</small></span></div>
+      </div>
+    </section>
+    <p class="keys"><kbd>Space</kbd> jump, slide &amp; turn <i>·</i> <kbd>P</kbd> pause</p>
+    <p id="announce" class="sr" role="status"></p>
+    <noscript>Enable JavaScript to play Timberline Dash.</noscript>
+  </main>
+</body>
+</html>
